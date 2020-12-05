@@ -27,6 +27,7 @@ package org.spongepowered.api.world.chunk;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.Server;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.util.Ticks;
 import org.spongepowered.api.world.ProtoWorld;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.volume.entity.ReadableEntityVolume;
@@ -143,6 +144,6 @@ public interface ProtoChunk<P extends ProtoChunk<P>> extends
 
     void setInhabitedTime(long newInhabitedTime);
 
-    long getInhabitedTime();
+    Ticks getInhabitedTime();
 
 }

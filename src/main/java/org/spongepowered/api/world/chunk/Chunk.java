@@ -26,6 +26,7 @@ package org.spongepowered.api.world.chunk;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.util.Direction;
+import org.spongepowered.api.util.Ticks;
 import org.spongepowered.api.util.annotation.DoNotStore;
 import org.spongepowered.api.world.World;
 import org.spongepowered.math.vector.Vector3i;
@@ -73,7 +74,7 @@ public interface Chunk extends ProtoChunk<Chunk> {
      *
      * @return The number of ticks
      */
-    long getInhabitedTime();
+    Ticks getInhabitedTime();
 
 
     /**
