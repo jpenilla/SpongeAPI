@@ -32,8 +32,6 @@ public final class HeightTypes {
 
     // SORTFIELDS:ON
 
-    public static final Supplier<HeightType> LIGHT_BLOCKING = Sponge.getRegistry().getCatalogRegistry().provideSupplier(HeightType.class, "light_blocking");
-
     public static final Supplier<HeightType> MOTION_BLOCKING = Sponge.getRegistry().getCatalogRegistry().provideSupplier(HeightType.class, "motion_blocking");
 
     public static final Supplier<HeightType> MOTION_BLOCKING_NO_LEAVES = Sponge.getRegistry().getCatalogRegistry().provideSupplier(HeightType.class, "motion_blocking_no_leaves");

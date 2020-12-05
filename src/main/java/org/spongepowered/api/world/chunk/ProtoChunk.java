@@ -107,7 +107,7 @@ public interface ProtoChunk<P extends ProtoChunk<P>> extends
      * which case, the {@link ProtoWorld} would not be a {@link World} instance.
      *
      * <p>It can be inferred however, that if {@link #getState()} returns
-     * {@link ChunkStates#WORLD_READY}, the {@link ProtoWorld} would be a
+     * {@link ChunkStates#FULL}, the {@link ProtoWorld} would be a
      * {@link World} instance. Inversely, if {@link #getState()} returns
      * {@link ChunkStates#EMPTY}, the {@link ProtoWorld} would not be a
      * valid {@link World} object.</p>
@@ -142,7 +142,7 @@ public interface ProtoChunk<P extends ProtoChunk<P>> extends
      */
     double getRegionalDifficultyPercentage();
 
-    void setInhabitedTime(long newInhabitedTime);
+    void setInhabitedTime(Ticks newInhabitedTime);
 
     Ticks getInhabitedTime();
 

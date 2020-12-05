@@ -34,7 +34,7 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 /**
- * A tick based priority scheduled list targeting speicifc types of
+ * A tick based priority scheduled list targeting specific types of
  * objects that need to be ticked. In common cases, there's either
  * a {@link BlockType} or {@link FluidType} being ticked.
  * @param <T> The type of update objects that are being scheduled
@@ -50,7 +50,7 @@ public interface ScheduledUpdateList<T> {
      * @param temporalUnit The unit of the delay
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(Vector3i pos, T target, int delay, TemporalUnit temporalUnit) {
+    default ScheduledUpdate<T> schedule(final Vector3i pos, final T target, final int delay, final TemporalUnit temporalUnit) {
         return this.schedule(pos.getX(), pos.getY(), pos.getZ(), target, delay, temporalUnit, TaskPriorities.NORMAL);
     }
 
@@ -61,7 +61,7 @@ public interface ScheduledUpdateList<T> {
      * @param delay The delay with a duration
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(Vector3i pos, T target, Duration delay) {
+    default ScheduledUpdate<T> schedule(final Vector3i pos, final T target, final Duration delay) {
         return this.schedule(pos.getX(), pos.getY(), pos.getZ(), target, delay, TaskPriorities.NORMAL);
     }
 
@@ -75,7 +75,7 @@ public interface ScheduledUpdateList<T> {
      * @param temporalUnit The unit of time
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(int x, int y, int z, T target, int delay, TemporalUnit temporalUnit) {
+    default ScheduledUpdate<T> schedule(final int x, final int y, final int z, final T target, final int delay, final TemporalUnit temporalUnit) {
         return this.schedule(x, y, z, target, delay, temporalUnit, TaskPriorities.NORMAL);
     }
 
@@ -88,7 +88,7 @@ public interface ScheduledUpdateList<T> {
      * @param delay The delay
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(int x, int y, int z, T target, Duration delay) {
+    default ScheduledUpdate<T> schedule(final int x, final int y, final int z, final T target, final Duration delay) {
         return this.schedule(x, y, z, target, delay, TaskPriorities.NORMAL);
     }
 
@@ -101,7 +101,7 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(Vector3i pos, T target, int delay, TemporalUnit temporalUnit, TaskPriority priority) {
+    default ScheduledUpdate<T> schedule(final Vector3i pos, final T target, final int delay, final TemporalUnit temporalUnit, final TaskPriority priority) {
         return this.schedule(pos.getX(), pos.getY(), pos.getZ(), target, Duration.of(delay, temporalUnit), priority);
     }
 
@@ -114,7 +114,7 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(Vector3i pos, T target, int delay, TemporalUnit temporalUnit, Supplier<? extends TaskPriority> priority) {
+    default ScheduledUpdate<T> schedule(final Vector3i pos, final T target, final int delay, final TemporalUnit temporalUnit, final Supplier<? extends TaskPriority> priority) {
         return this.schedule(pos.getX(), pos.getY(), pos.getZ(), target, Duration.of(delay, temporalUnit), priority.get());
     }
 
@@ -126,7 +126,7 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(Vector3i pos, T target, Duration delay, TaskPriority priority) {
+    default ScheduledUpdate<T> schedule(final Vector3i pos, final T target, final Duration delay, final TaskPriority priority) {
         return this.schedule(pos.getX(), pos.getY(), pos.getZ(), target, delay, priority);
     }
 
@@ -138,7 +138,7 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(Vector3i pos, T target, Duration delay, Supplier<? extends TaskPriority> priority) {
+    default ScheduledUpdate<T> schedule(final Vector3i pos, final T target, final Duration delay, final Supplier<? extends TaskPriority> priority) {
         return this.schedule(pos.getX(), pos.getY(), pos.getZ(), target, delay, priority.get());
     }
 
@@ -153,7 +153,8 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(int x, int y, int z, T target, int delay, TemporalUnit temporalUnit, TaskPriority priority) {
+    default ScheduledUpdate<T> schedule(
+            final int x, final int y, final int z, final T target, final int delay, final TemporalUnit temporalUnit, final TaskPriority priority) {
         return this.schedule(x, y, z, target, Duration.of(delay, temporalUnit), priority);
     }
 
@@ -168,7 +169,8 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(int x, int y, int z, T target, int delay, TemporalUnit temporalUnit, Supplier<? extends TaskPriority> priority) {
+    default ScheduledUpdate<T> schedule(
+            final int x, final int y, final int z, final T target, final int delay, final TemporalUnit temporalUnit, final Supplier<? extends TaskPriority> priority) {
         return this.schedule(x, y, z, target, Duration.of(delay, temporalUnit), priority.get());
     }
 
@@ -194,7 +196,7 @@ public interface ScheduledUpdateList<T> {
      * @param priority The priority of the scheduled update
      * @return The scheduled update
      */
-    default ScheduledUpdate<T> schedule(int x, int y, int z, T target, Duration delay, Supplier<? extends TaskPriority> priority) {
+    default ScheduledUpdate<T> schedule(final int x, final int y, final int z, final T target, final Duration delay, final Supplier<? extends TaskPriority> priority) {
         return this.schedule(x, y, z, target, delay, priority.get());
     }
 
@@ -205,7 +207,7 @@ public interface ScheduledUpdateList<T> {
      * @param target The target
      * @return True if there's an update scheduled
      */
-    default boolean isScheduled(Vector3i pos, T target) {
+    default boolean isScheduled(final Vector3i pos, final T target) {
         return this.isScheduled(pos.getX(), pos.getY(), pos.getZ(), target);
     }
 
@@ -224,7 +226,7 @@ public interface ScheduledUpdateList<T> {
      * @param pos The position
      * @return The collection of scheduled updates at the desired position
      */
-    default Collection<? extends ScheduledUpdate<T>> getScheduledAt(Vector3i pos) {
+    default Collection<? extends ScheduledUpdate<T>> getScheduledAt(final Vector3i pos) {
         return this.getScheduledAt(pos.getX(), pos.getY(), pos.getZ());
     }
 

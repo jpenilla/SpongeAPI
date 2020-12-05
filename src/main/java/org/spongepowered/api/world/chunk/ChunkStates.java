@@ -25,6 +25,7 @@
 package org.spongepowered.api.world.chunk;
 
 import org.spongepowered.api.Sponge;
+import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.entity.BlockEntity;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.world.ProtoWorld;
@@ -38,18 +39,16 @@ public final class ChunkStates {
     // SORTFIELDS:ON
 
     /**
-     * A {@link ProtoChunk} that is at this state means that it is being generated
-     * with a "base" layer of terrain.
-     * The chunk should not have any {@link Entity} instances or {@link BlockEntity}
-     * instances and may have a valid {@link ProtoWorld} used for world generation.
+     * A {@link ProtoChunk} that is having its {@link BiomeType biomes}
+     * assinged.
      */
-    public static final Supplier<ChunkState> BASE = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "base");
+    public static final Supplier<ChunkState> BIOMES = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "biomes");
 
     /**
-     * A {@link ProtoChunk} that is being "carved out" for general terrain features
-     * that require things like "caves" or "canyons".
+     * A {@link ProtoChunk} that is being "carved out" for general terrain
+     * features that require things like "caves" or "canyons".
      */
-    public static final Supplier<ChunkState> CARVED = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "carved");
+    public static final Supplier<ChunkState> CARVERS = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "carvers");
 
     /**
      * A {@link ProtoChunk} state that is being populated by world generation,
@@ -66,32 +65,31 @@ public final class ChunkStates {
     public static final Supplier<ChunkState> EMPTY = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "empty");
 
     /**
-     * A {@link ProtoChunk} state that is being used for entity spawning.
-     * Generally requires that the neighboring chunks are adequately populated,
-     * and requires that this chunk has proper lighting, for mob placement logic.
+     * A {@link ProtoChunk} has been carved out, and is now being decorated with
+     * features, such as leaves and tall grass.
      */
-    public static final Supplier<ChunkState> ENTITIES_SPAWNED = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "entities_spawned");
+    public static final Supplier<ChunkState> FEATURES = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "features");
+
+    /**
+     * State for a {@link ProtoChunk} marking it being used by a world, and not
+     * in the process of either world generation, or deserialization from
+     * storage. Only {@link Chunk}s should provide this state, other
+     * {@link ProtoChunk}s would be invalid with this state.
+     */
+    public static final Supplier<ChunkState> FULL = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "full");
 
     /**
      * A {@link ProtoChunk} state that is "cleaning" up remnant objects of a
      * chunk in process of world generation. Generally, height maps are being
      * calculated at this point as entity spawning can affect block placement.
      */
-    public static final Supplier<ChunkState> FINALIZED = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "finalized");
-
-    /**
-     * A {@link ProtoChunk} that has completed world generation tasks and can be
-     * added to a level ready {@link World}. Likewise can be utilized during
-     * chunk deserialization prior to a {@link Chunk} being fully added to a
-     * {@link World} instance.
-     */
-    public static final Supplier<ChunkState> GENERATED = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "generated");
+    public static final Supplier<ChunkState> HEIGHTMAPS = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "heightmaps");
 
     /**
      * A {@link ProtoChunk} state that is being "carved" with liquid cave
      * features, such as underwater ravines, underwater caves, etc.
      */
-    public static final Supplier<ChunkState> LIQUID_CARVED = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "liquid_carved");
+    public static final Supplier<ChunkState> LIQUID_CARVERS = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "liquid_carvers");
 
     /**
      * A {@link ProtoChunk} state that has yet been processed with lighting in
@@ -99,15 +97,43 @@ public final class ChunkStates {
      * to last step in the world generation pipeline for a chunk to be marked
      * as ready for being added to a {@link World}.
      */
-    public static final Supplier<ChunkState> LIT = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "lit");
+    public static final Supplier<ChunkState> LIGHT = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "light");
 
     /**
-     * State for a {@link ProtoChunk} marking it being used by a world, and not
-     * in the process of either world generation, or deserialization from storage.
-     * Should have an instance of {@link Chunk} providing this state only, as
-     * other {@link ProtoChunk}s would assuredly be invalid with this state.
+     * A {@link ProtoChunk} where the {@link BlockState block states} are being
+     * set and structure locations are set.
      */
-    public static final Supplier<ChunkState> WORLD_READY = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "world_ready");
+    public static final Supplier<ChunkState> NOISE = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "noise");
+
+    /**
+     * A {@link ProtoChunk} state that is being used for entity spawning.
+     * Generally requires that the neighboring chunks are adequately populated,
+     * and requires that this chunk has proper lighting, for mob placement
+     * logic.
+     */
+    public static final Supplier<ChunkState> SPAWN = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "spawn");
+
+    /**
+     * A {@link ProtoChunk} where the structures to be placed in the chunk are
+     * being determined and primed for placement.
+     */
+    public static final Supplier<ChunkState> STRUCTURE_STARTS = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "structure_starts");
+
+    /**
+     * A {@link ProtoChunk} where final validity checks are being performed on
+     * structures that are primed to be placed in the chunk.
+     */
+    public static final Supplier<ChunkState> STRUCTURE_REFERENCES = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "structure_references");
+
+    /**
+     * A {@link ProtoChunk} that is at this state means that it is being
+     * generated with a "base" layer of terrain.
+     *
+     * <p>The chunk should not have any {@link Entity} instances or
+     * {@link BlockEntity} instances and may have a valid {@link ProtoWorld}
+     * used for world generation.</p>
+     */
+    public static final Supplier<ChunkState> SURFACE = Sponge.getRegistry().getCatalogRegistry().provideSupplier(ChunkState.class, "surface");
 
     // SORTFIELDS:OFF
 
