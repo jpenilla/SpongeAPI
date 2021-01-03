@@ -24,7 +24,6 @@
  */
 package org.spongepowered.api.world.server;
 
-import org.spongepowered.api.CatalogType;
 import org.spongepowered.api.util.Ticks;
 import org.spongepowered.api.util.annotation.CatalogedBy;
 
@@ -36,7 +35,7 @@ import org.spongepowered.api.util.annotation.CatalogedBy;
  *      type.
  */
 @CatalogedBy(TicketTypes.class)
-public interface TicketType<T> extends CatalogType {
+public interface TicketType<T> {
 
     /**
      * Gets the lifetime of any {@link Ticket tickets} of this type.

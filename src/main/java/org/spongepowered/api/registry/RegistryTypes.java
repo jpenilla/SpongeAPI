@@ -131,6 +131,7 @@ import org.spongepowered.api.world.ChunkRegenerateFlag;
 import org.spongepowered.api.world.HeightType;
 import org.spongepowered.api.world.LightType;
 import org.spongepowered.api.world.generation.Structure;
+import org.spongepowered.api.world.server.TicketType;
 import org.spongepowered.api.world.server.WorldTemplate;
 import org.spongepowered.api.world.biome.Biome;
 import org.spongepowered.api.world.chunk.ChunkState;
@@ -366,6 +367,8 @@ public final class RegistryTypes {
     public static final RegistryType<TaskPriority> TASK_PRIORITY = RegistryTypes.spongeKey("task_priority");
 
     public static final RegistryType<TeleportHelperFilter> TELEPORT_HELPER_FILTER = RegistryTypes.spongeKey("teleport_helper_filter");
+
+    public static final RegistryType<TicketType<?>> TICKET_TYPE = RegistryTypes.spongeKey("ticket_type");
 
     public static final RegistryType<TransactionType> TRANSACTION_TYPE = RegistryTypes.spongeKey("transaction_type");
 

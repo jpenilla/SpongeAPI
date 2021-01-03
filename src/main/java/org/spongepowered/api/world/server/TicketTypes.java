@@ -24,8 +24,13 @@
  */
 package org.spongepowered.api.world.server;
 
+import org.spongepowered.api.ResourceKey;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.event.cause.entity.SpawnType;
+import org.spongepowered.api.registry.DefaultedRegistryReference;
+import org.spongepowered.api.registry.RegistryKey;
+import org.spongepowered.api.registry.RegistryTypes;
 import org.spongepowered.api.util.Ticks;
 import org.spongepowered.api.world.chunk.Chunk;
 import org.spongepowered.api.world.portal.Portal;
@@ -39,27 +44,41 @@ import java.util.function.Supplier;
  */
 public final class TicketTypes {
 
+    // @formatter:off
+
+    // SORTFIELDS:ON
+
     /**
      * Represents {@link Ticket tickets} that ensures the target
      * {@link Chunk chunks} are loaded, but are not guaranteed to be loaded at
      * any time in the future, that is, the lifetime of such a ticket is
      * effectively {@link Ticks#zero() zero ticks}.
      */
-    public static final Supplier<TicketType<Vector3i>> FORCED = Sponge.getRegistry().getCatalogRegistry().provideSupplier(TicketType.class, "forced");
+    public static final DefaultedRegistryReference<TicketType<Vector3i>> FORCED = TicketTypes.key(ResourceKey.sponge("forced"));
 
     /**
      * Represents {@link Ticket tickets} that are intended to ensure that the
      * target {@link Chunk chunks} around a {@link Portal} are loaded, ready to
      * accept {@link Entity entities} that travel through it.
      */
-    public static final Supplier<TicketType<Vector3i>> PORTAL = Sponge.getRegistry().getCatalogRegistry().provideSupplier(TicketType.class, "portal");
+    public static final DefaultedRegistryReference<TicketType<Vector3i>> PORTAL = TicketTypes.key(ResourceKey.sponge("portal"));
 
     /**
      * Represents {@link Ticket tickets} that are intended to ensure that the
      * target {@link Chunk chunks} around an {@link Entity} are loaded after
      * teleportation.
      */
-    public static final Supplier<TicketType<Entity>> POST_TELEPORT = Sponge.getRegistry().getCatalogRegistry().provideSupplier(TicketType.class, "post_teleport");
+    public static final DefaultedRegistryReference<TicketType<Entity>> POST_TELEPORT = TicketTypes.key(ResourceKey.sponge("post_teleport"));
 
+    // SORTFIELDS:OFF
+
+    // @formatter:on
+
+    private TicketTypes() {
+    }
+
+    private static <T> DefaultedRegistryReference<TicketType<T>> key(final ResourceKey location) {
+        return RegistryKey.of(RegistryTypes.TICKET_TYPE, location).asDefaultedReference(() -> Sponge.getGame().registries());
+    }
 
 }
