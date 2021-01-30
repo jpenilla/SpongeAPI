@@ -59,7 +59,7 @@ public final class VariableValueParameters {
 
     /**
      * Creates a builder that can build a {@link ValueParameter} that returns
-     * an appropriate {@link CatalogType} from an argument.
+     * an appropriate {@link Registry registry} entry from an argument.
      *
      * @param holderProvider The provider for a {@link RegistryHolder} to
      *          retrieve the selected {@link Registry} from
@@ -75,7 +75,7 @@ public final class VariableValueParameters {
 
     /**
      * Creates a builder that can build a {@link ValueParameter} that returns
-     * an appropriate {@link CatalogType} from an argument.
+     * an appropriate {@link Registry registry} entry from an argument.
      *
      * @param registryProvider A {@link Function} that retrieves an appropriate
      *      {@link Registry} to get objects from
@@ -91,7 +91,7 @@ public final class VariableValueParameters {
      * Creates a builder that can build a {@link ValueParameter} that returns
      * an appropriate type from the provided {@link Registry} from an argument.
      *
-     * @param defaultedRegistryReference The {@link DefaultedRegistryReference}
+     * @param type The {@link DefaultedRegistryReference}
      *      to use to retrieve a {@link Registry} that contains the objects to
      *      retrieve
      * @param <T> The type in the {@link Registry}
@@ -220,7 +220,7 @@ public final class VariableValueParameters {
 
     /**
      * A builder that creates a {@link ValueParameter} that attempts to get a
-     * specific {@link CatalogType} by the supplied ID.
+     * specific {@link Registry registry} entry by the supplied ID.
      */
     public interface CatalogedTypeBuilder<T> extends Builder<ValueParameter<T>, CatalogedTypeBuilder<T>> {
 
@@ -244,7 +244,7 @@ public final class VariableValueParameters {
 
         /**
          * Adds a prefix that could be prepended to the input argument if it
-         * initially does not match any of the chosen {@link CatalogType}. Any
+         * initially does not match any of the chosen {@link RegistryKey}s. Any
          * prefixes that are prepended will include the ":" identifier, this
          * should not be part of the supplied prefix in this method.
          *
@@ -661,7 +661,8 @@ public final class VariableValueParameters {
          * object from the appropriate {@link Registry}.
          *
          * @param <T> The type that the target {@link Registry} holds
-         * @param registryReference
+         * @param type The {@link DefaultedRegistryType} to base this parameter
+         *             on
          * @return The {@link CatalogedTypeBuilder}
          */
         <T> VariableValueParameters.CatalogedTypeBuilder<T> createRegistryEntryBuilder(DefaultedRegistryType<T> type);

@@ -24,7 +24,7 @@
  */
 package org.spongepowered.api.command.parameter.managed;
 
-import com.google.common.collect.ImmutableList;
+import org.spongepowered.api.command.CommandCause;
 import org.spongepowered.api.command.CommandExecutor;
 import org.spongepowered.api.command.exception.ArgumentParseException;
 import org.spongepowered.api.command.parameter.ArgumentReader;
@@ -34,6 +34,7 @@ import org.spongepowered.api.command.parameter.managed.clientcompletion.ClientCo
 import org.spongepowered.api.command.parameter.managed.clientcompletion.ClientCompletionTypes;
 import org.spongepowered.api.event.Cause;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,7 +111,7 @@ public interface ValueParser<T> {
      * @return The {@link ClientCompletionType}s to use on the client.
      */
     default List<ClientCompletionType> getClientCompletionType() {
-        return ImmutableList.of();
+        return Collections.emptyList();
     }
 
 }
