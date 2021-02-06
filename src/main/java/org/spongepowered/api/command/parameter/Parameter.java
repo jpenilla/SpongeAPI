@@ -39,6 +39,7 @@ import org.spongepowered.api.command.CommandExecutor;
 import org.spongepowered.api.command.exception.ArgumentParseException;
 import org.spongepowered.api.command.parameter.managed.ValueCompleter;
 import org.spongepowered.api.command.parameter.managed.ValueParameter;
+import org.spongepowered.api.command.parameter.managed.ValueParameterModifier;
 import org.spongepowered.api.command.parameter.managed.ValueParser;
 import org.spongepowered.api.command.parameter.managed.ValueUsage;
 import org.spongepowered.api.command.parameter.managed.standard.ResourceKeyedValueParameters;
@@ -978,6 +979,14 @@ public interface Parameter {
         ValueCompleter getCompleter();
 
         /**
+         * Gets the {@link ValueParameterModifier} that affects this parameter,
+         * if any.
+         *
+         * @return The {@link ValueParameterModifier}, if set.
+         */
+        Optional<ValueParameterModifier<T>> modifier();
+
+        /**
          * Gets the {@link ValueUsage} associated with this {@link Value}, if
          * any was set.
          *
@@ -994,7 +1003,7 @@ public interface Parameter {
         Predicate<CommandCause> getRequirement();
 
         /**
-         * Parses the next element(s) in the {@link CommandContext}
+         * Parses the next element(s) in the {@link CommandContext}.
          *
          * @param reader The {@link ArgumentReader.Mutable} containing the strings
          *               that need to be parsed
@@ -1098,6 +1107,21 @@ public interface Parameter {
              * @return This builder, for chaining
              */
             Builder<T> setSuggestions(@Nullable ValueCompleter completer);
+
+            /**
+             * Provides a modifier that allows for the modification of the
+             * outcome of an argument parse or a completion. This is primarily
+             * intended for use with Mojang/Sponge standard parameters, allowing
+             * developers to tweak the output of a standard parameter without
+             * having to worry about completion types.
+             *
+             * <p>Optional. If this is <code>null</code> (or never set), any
+             * outcomes will not be modified.</p>
+             *
+             * @param modifier The modifier
+             * @return This builder, for chaning
+             */
+            Builder<T> setModifier(@Nullable ValueParameterModifier<T> modifier);
 
             /**
              * Sets the usage. The {@link Function} accepts the parameter key
