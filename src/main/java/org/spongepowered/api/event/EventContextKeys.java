@@ -48,6 +48,7 @@ import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.TypeTokens;
 import org.spongepowered.api.world.LocatableBlock;
 import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.portal.Portal;
 import org.spongepowered.api.world.server.ServerLocation;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.explosion.Explosion;
@@ -232,6 +233,11 @@ public final class EventContextKeys {
      * Represents a {@link PluginContainer}.
      */
     public static final EventContextKey<PluginContainer> PLUGIN = EventContextKeys.key(ResourceKey.sponge("plugin"), TypeTokens.PLUGIN_CONTAINER_TOKEN);
+
+    /**
+     * Represents a {@link Portal}.
+     */
+    public static final EventContextKey<Portal> PORTAL = EventContextKeys.key(ResourceKey.sponge("portal"), TypeTokens.PORTAL_TYPE_TOKEN);
 
     /**
      * Represents a {@link ProjectileSource}.
